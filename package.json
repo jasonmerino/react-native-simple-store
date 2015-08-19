@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "respository": {
+    "type": "git",
+    "url": "https://github.com/jasonmerino/react-native-simple-store"
+  },
   "keywords": [
     "React Native",
     "AsyncStorage",
