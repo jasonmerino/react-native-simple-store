@@ -10,7 +10,27 @@ A minimalistic wrapper around React Native's AsyncStorage.
 npm install react-native-data-store
 ```
 
-## Usage
+## API Reference
+
+`.save([String key], [Object|String value]) -> Promise`
+
+Save a key and associated value.
+
+`.get([String key]) -> Promise`
+
+Get a value for the given key.
+
+`.update([String key], [Object value]) -> Promise`
+
+Update the current value for the given key with the provided value.
+
+**Note:** *Update currently only supports objects and merges them together.*
+
+`.delete([String key]) -> Promise`
+
+Delete the value associated with a given key and remove the key.
+
+## Example Usage
 
 ```javascript
 var store = require('react-native-data-store');
@@ -48,23 +68,3 @@ store.save('coffee', {
 
 });
 ```
-
-## API
-
-### `.save(key, value)`
-
-Save a key and associated value. Returns a promise.
-
-### `.get(key)`
-
-Get a value for the given key. Returns a promise with value.
-
-### `.update(key, value)`
-
-Update the current value for the given key with the provided value. Returns a promise.
-
-*`.update` currently only supports objects and merges them together.*
-
-### `.delete(key)`
-
-Delete the value associated with a given key and remove the key.
