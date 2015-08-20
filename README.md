@@ -4,14 +4,10 @@ A minimalistic wrapper around React Native's AsyncStorage.
 
 ## Installation
 
-1. Install `react-native-data-store` and `regenerator`
-```bash
-npm install react-native-data-store regenerator
-```
+1. Install `react-native-data-store`
 
-1. Add regenerator at the top of your react native app
-```javascript
-require('regenerator/runtime');
+```bash
+npm install react-native-data-store
 ```
 
 ## Usage
