@@ -18,7 +18,5 @@
   ],
   "author": "Jason Merino",
   "license": "MIT",
-  "dependencies": {
-    "regenerator": "^0.8.36"
-  }
+  "dependencies": {}
 }

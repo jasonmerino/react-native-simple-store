@@ -1,4 +1,3 @@
-require('regenerator/runtime');
 var React = require('react-native');
 
 var {
@@ -6,22 +5,24 @@ var {
 } = React;
 
 var deviceStorage = {
-	async get(key) {
-		return JSON.parse(await AsyncStorage.getItem(key));
+	get(key) {
+		return AsyncStorage.getItem(key).then(function(value) {
+			return JSON.parse(value);
+		});
 	},
 
-	async save(key, value) {
-		return await AsyncStorage.setItem(key, JSON.stringify(value));
+	save(key, value) {
+		return AsyncStorage.setItem(key, JSON.stringify(value));
 	},
 
-	async update(key, value) {
-		return await deviceStorage.get(key).then((item) => {
+	update(key, value) {
+		return deviceStorage.get(key).then((item) => {
 			return AsyncStorage.setItem(key, JSON.stringify(Object.assign({}, item, value)));
 		});
 	},
 
-	async delete(key) {
-		return await AsyncStorage.removeItem(key);
+	delete(key) {
+		return AsyncStorage.removeItem(key);
 	}
 };
 

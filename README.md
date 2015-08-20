@@ -4,8 +4,14 @@ A minimalistic wrapper around React Native's AsyncStorage.
 
 ## Installation
 
+1. Install `react-native-data-store` and `regenerator`
 ```bash
-npm install react-native-data-store
+npm install react-native-data-store regenerator
+```
+
+1. Add regenerator at the top of your react native app
+```javascript
+require('regenerator/runtime');
 ```
 
 ## Usage
@@ -45,5 +51,24 @@ store.save('coffee', {
 	});
 
 });
-
 ```
+
+## API
+
+### `.save(key, value)`
+
+Save a key and associated value. Returns a promise.
+
+### `.get(key)`
+
+Get a value for the given key. Returns a promise with value.
+
+### `.update(key, value)`
+
+Update the current value for the given key with the provided value. Returns a promise.
+
+*`.update` currently only supports objects and merges them together.*
+
+### `.delete(key)`
+
+Delete the value associated with a given key and remove the key.
