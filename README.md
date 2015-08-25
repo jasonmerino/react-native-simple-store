@@ -4,10 +4,10 @@ A minimalistic wrapper around React Native's AsyncStorage.
 
 ## Installation
 
-1. Install `react-native-data-store`
+1. Install `react-native-simple-store`
 
 ```bash
-npm install react-native-data-store
+npm install react-native-simple-store
 ```
 
 ## API Reference
@@ -33,7 +33,7 @@ Delete the value associated with a given key and remove the key.
 ## Example Usage
 
 ```javascript
-var store = require('react-native-data-store');
+var store = require('react-native-simple-store');
 
 // save
 store.save('coffee', {
