@@ -5,23 +5,23 @@ var {
 } = React;
 
 var deviceStorage = {
-	get(key) {
+	get: function(key) {
 		return AsyncStorage.getItem(key).then(function(value) {
 			return JSON.parse(value);
 		});
 	},
 
-	save(key, value) {
+	save: function(key, value) {
 		return AsyncStorage.setItem(key, JSON.stringify(value));
 	},
 
-	update(key, value) {
+	update: function(key, value) {
 		return deviceStorage.get(key).then((item) => {
 			return AsyncStorage.setItem(key, JSON.stringify(Object.assign({}, item, value)));
 		});
 	},
 
-	delete(key) {
+	delete: function(key) {
 		return AsyncStorage.removeItem(key);
 	}
 };
