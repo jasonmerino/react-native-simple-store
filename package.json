@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "respository": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/jasonmerino/react-native-simple-store"
   },
