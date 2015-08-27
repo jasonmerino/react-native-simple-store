@@ -30,7 +30,7 @@ jest.setMock('react-native', {
 
 describe('save', function() {
 
-	pit('should only call setItem once', function() {
+	pit('should return a promise with no errors', function() {
 		var store = require('../index');
 		return store.save('testing', getTestData()).then(function(error) {
 			expect(error).toEqual(null);
@@ -41,7 +41,7 @@ describe('save', function() {
 
 describe('get', function() {
 
-	pit('should only call setItem once', function() {
+	pit('should return a promise with saved data', function() {
 		var store = require('../index');
 		return store.get('testing').then(function(error) {
 			expect(error).toEqual(getTestData());
@@ -52,7 +52,7 @@ describe('get', function() {
 
 describe('update', function() {
 
-	pit('should only call setItem once', function() {
+	pit('should return a promise with no errors', function() {
 		var store = require('../index');
 		return store.update('testing', {
 			isAGoodTest: false
@@ -65,7 +65,7 @@ describe('update', function() {
 
 describe('delete', function() {
 
-	pit('should only call setItem once', function() {
+	pit('should return a promise with no errors', function() {
 		var store = require('../index');
 		return store.delete('testing').then(function(error) {
 			expect(error).toEqual(null);
