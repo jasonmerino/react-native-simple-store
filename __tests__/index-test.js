@@ -8,7 +8,7 @@ function getTestData() {
 
 jest.dontMock('../index');
 
-var reactNativeMock = jest.setMock('react-native', {
+jest.setMock('react-native', {
 	AsyncStorage: {
 		setItem: jest.genMockFunction().mockImplementation(function() {
 			return Q.promise(function(resolve) {
@@ -19,13 +19,16 @@ var reactNativeMock = jest.setMock('react-native', {
 			return Q.promise(function(resolve) {
 				resolve(JSON.stringify(getTestData()));
 			})
+		}),
+		removeItem: jest.genMockFunction().mockImplementation(function() {
+			return Q.promise(function(resolve) {
+				resolve(null);
+			})
 		})
 	}
 });
 
-console.log(reactNativeMock.mock);
-
-describe('Save', function() {
+describe('save', function() {
 
 	pit('should only call setItem once', function() {
 		var store = require('../index');
@@ -36,12 +39,36 @@ describe('Save', function() {
 
 });
 
-describe('Get', function() {
+describe('get', function() {
 
 	pit('should only call setItem once', function() {
 		var store = require('../index');
 		return store.get('testing').then(function(error) {
 			expect(error).toEqual(getTestData());
+		});
+	});
+
+});
+
+describe('update', function() {
+
+	pit('should only call setItem once', function() {
+		var store = require('../index');
+		return store.update('testing', {
+			isAGoodTest: false
+		}).then(function(error) {
+			expect(error).toEqual(null);
+		});
+	});
+
+});
+
+describe('delete', function() {
+
+	pit('should only call setItem once', function() {
+		var store = require('../index');
+		return store.delete('testing').then(function(error) {
+			expect(error).toEqual(null);
 		});
 	});
 
