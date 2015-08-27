@@ -1,6 +1,6 @@
 {
   "name": "react-native-simple-store",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A minimalistic wrapper around React Native's AsyncStorage.",
   "main": "index.js",
   "scripts": {
