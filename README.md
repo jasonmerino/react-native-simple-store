@@ -1,10 +1,10 @@
 # React Native Simple Store
 
+[![Build Status](https://travis-ci.org/jasonmerino/react-native-simple-store.svg?branch=master)](https://travis-ci.org/jasonmerino/react-native-simple-store)
+
 A minimalistic wrapper around React Native's AsyncStorage.
 
 ## Installation
-
-1. Install `react-native-simple-store`
 
 ```bash
 npm install react-native-simple-store
@@ -40,29 +40,32 @@ store.save('coffee', {
 	isAwesome: true
 }).then(() => {
 
-	// get
-	store.get('coffee').then((coffee) => {
-		coffee.isAwesome // true
+	return store.get('coffee').then((coffee) => {
+		expect(coffee.isAwesome).toBe(true);
 	});
 
-	// update
-	store.update('coffee', {
+}).then(() => {
+
+	return store.update('coffee', {
 		isNotEssential: false
-	}).then((coffee) => {
+	})
 
-		coffee.isNotEssential // false
-		coffee.isAwesome // true
+}).then(() => {
 
-		// delete
-		store.delete('coffee').then(() => {
+	return store.get('coffee');
 
-			store.get('coffee').then((coffee) => {
+}).then((coffee) => {
 
-				coffee // null
+	expect(coffee.isNotEssential).toBe(false);
+	expect(coffee.isAwesome).toBe(true);
 
-			});
+	return store.delete('coffee')
 
-		});
+}).then(() => {
+
+	store.get('coffee').then((coffee) => {
+
+		expect(coffee).toEqual(null);
 
 	});
 
