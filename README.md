@@ -35,20 +35,19 @@ Delete the value associated with a given key and remove the key.
 ```javascript
 var store = require('react-native-simple-store');
 
-// save
 store.save('coffee', {
 	isAwesome: true
 }).then(() => {
 
 	return store.get('coffee').then((coffee) => {
-		expect(coffee.isAwesome).toBe(true);
+		console.log(coffee.isAwesome === true); // true
 	});
 
 }).then(() => {
 
 	return store.update('coffee', {
 		isNotEssential: false
-	})
+	});
 
 }).then(() => {
 
@@ -56,15 +55,15 @@ store.save('coffee', {
 
 }).then((coffee) => {
 
-	expect(coffee.isNotEssential).toBe(false);
-	expect(coffee.isAwesome).toBe(true);
+	console.log(coffee.isNotEssential === false); // true
+	console.log(coffee.isAwesome === true); // true
 
-	return store.delete('coffee')
+	return store.delete('coffee');
 
 }).then(() => {
 
 	store.get('coffee').then((coffee) => {
-		expect(coffee).toEqual(null);
+		console.log(coffee === null); // true
 	});
 
 });
