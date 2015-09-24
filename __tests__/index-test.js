@@ -61,6 +61,13 @@ describe('update', function() {
 		});
 	});
 
+	pit('should handle a string and return a promise with no errors', function() {
+		var store = require('../index');
+		return store.update('testing', 'asdf').then(function(error) {
+			expect(error).toEqual(null);
+		});
+	});
+
 });
 
 describe('delete', function() {

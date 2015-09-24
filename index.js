@@ -17,7 +17,8 @@ var deviceStorage = {
 
 	update: function(key, value) {
 		return deviceStorage.get(key).then((item) => {
-			return AsyncStorage.setItem(key, JSON.stringify(Object.assign({}, item, value)));
+			value = typeof value === 'string' ? value : Object.assign({}, item, value);
+			return AsyncStorage.setItem(key, JSON.stringify(value));
 		});
 	},
 
