@@ -20,6 +20,8 @@
   },
   "keywords": [
     "React Native",
+    "iOS",
+    "Android",
     "AsyncStorage",
     "data store",
     "key value store"
