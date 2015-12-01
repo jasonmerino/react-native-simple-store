@@ -1,8 +1,6 @@
 var React = require('react-native');
 
-var {
-	AsyncStorage
-} = React;
+var AsyncStorage = React.AsyncStorage;
 
 var deviceStorage = {
 	get: function(key) {
