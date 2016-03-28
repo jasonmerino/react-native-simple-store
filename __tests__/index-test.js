@@ -1,4 +1,6 @@
-var Q = require('q');
+'use strict';
+
+const Q = require('q');
 
 function getTestData() {
 	return {
@@ -6,7 +8,9 @@ function getTestData() {
 	};
 }
 
-jest.dontMock('../index');
+const INDEX_PATH = '../src/index';
+
+jest.dontMock(INDEX_PATH);
 
 jest.setMock('react-native', {
 	AsyncStorage: {
@@ -31,7 +35,7 @@ jest.setMock('react-native', {
 describe('save', function() {
 
 	pit('should return a promise with no errors', function() {
-		var store = require('../index');
+		var store = require(INDEX_PATH);
 		return store.save('testing', getTestData()).then(function(error) {
 			expect(error).toEqual(null);
 		});
@@ -42,7 +46,7 @@ describe('save', function() {
 describe('get', function() {
 
 	pit('should return a promise with saved data', function() {
-		var store = require('../index');
+		var store = require(INDEX_PATH);
 		return store.get('testing').then(function(error) {
 			expect(error).toEqual(getTestData());
 		});
@@ -53,7 +57,7 @@ describe('get', function() {
 describe('update', function() {
 
 	pit('should return a promise with no errors', function() {
-		var store = require('../index');
+		var store = require(INDEX_PATH);
 		return store.update('testing', {
 			isAGoodTest: false
 		}).then(function(error) {
@@ -62,7 +66,7 @@ describe('update', function() {
 	});
 
 	pit('should handle a string and return a promise with no errors', function() {
-		var store = require('../index');
+		var store = require(INDEX_PATH);
 		return store.update('testing', 'asdf').then(function(error) {
 			expect(error).toEqual(null);
 		});
@@ -73,7 +77,7 @@ describe('update', function() {
 describe('delete', function() {
 
 	pit('should return a promise with no errors', function() {
-		var store = require('../index');
+		var store = require(INDEX_PATH);
 		return store.delete('testing').then(function(error) {
 			expect(error).toEqual(null);
 		});
