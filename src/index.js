@@ -1,28 +1,26 @@
-var React = require('react-native');
+'use strict';
 
-var {
-	AsyncStorage
-} = React;
+import { AsyncStorage } from 'react-native';
 
-var deviceStorage = {
-	get: function(key) {
-		return AsyncStorage.getItem(key).then(function(value) {
+const deviceStorage = {
+	get(key) {
+		return AsyncStorage.getItem(key).then(value => {
 			return JSON.parse(value);
 		});
 	},
 
-	save: function(key, value) {
+	save(key, value) {
 		return AsyncStorage.setItem(key, JSON.stringify(value));
 	},
 
-	update: function(key, value) {
-		return deviceStorage.get(key).then((item) => {
+	update(key, value) {
+		return deviceStorage.get(key).then(item => {
 			value = typeof value === 'string' ? value : Object.assign({}, item, value);
 			return AsyncStorage.setItem(key, JSON.stringify(value));
 		});
 	},
 
-	delete: function(key) {
+	delete(key) {
 		return AsyncStorage.removeItem(key);
 	}
 };
