@@ -1,2 +1,6 @@
 __tests__
 src
+.babelrc
+.gitignore
+.travis.yml
+LICENSE

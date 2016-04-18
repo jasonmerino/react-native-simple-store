@@ -36,38 +36,30 @@ Delete the value associated with a given key and remove the key.
 ```javascript
 var store = require('react-native-simple-store');
 
-store.save('coffee', {
-	isAwesome: true
-}).then(() => {
-
-	return store.get('coffee').then((coffee) => {
-		console.log(coffee.isAwesome === true); // true
-	});
-
-}).then(() => {
-
-	return store.update('coffee', {
-		isNotEssential: false
-	});
-
-}).then(() => {
-
-	return store.get('coffee');
-
-}).then((coffee) => {
-
-	console.log(coffee.isNotEssential === false); // true
-	console.log(coffee.isAwesome === true); // true
-
-	return store.delete('coffee');
-
-}).then(() => {
-
-	store.get('coffee').then((coffee) => {
-		console.log(coffee === null); // true
-	});
-
-});
+store
+  .save('coffee', {
+    isAwesome: true
+  })
+  .then(() => store.get('coffee'))
+  .then(coffee => {
+    console.assert(coffee.isAwesome === true);
+  })
+  .then(() => store.update('coffee', {
+    isNotEssential: false
+  }))
+  .then(() => store.get('coffee'))
+  .then(coffee => {
+    console.assert(coffee.isNotEssential === false);
+    console.assert(coffee.isAwesome === true);
+    return store.delete('coffee');
+  })
+  .then(() => store.get('coffee'))
+  .then(coffee => {
+    console.assert(coffee === null);
+  })
+  .catch(error => {
+    console.error(error.message);
+  });
 ```
 
 ## License
