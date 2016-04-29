@@ -64,4 +64,4 @@ store
 
 ## License
 
-MIT © Jason Merino 2015
+MIT
