@@ -12,7 +12,7 @@ const deviceStorage = {
 	multiGet(keys) {
 		return AsyncStorage.multiGet(keys).then(values => {
 			return values.map(val => {
-				return JSON.parse(value[1]);
+				return JSON.parse(val[1]);
 			})
 		})
 	},
