@@ -9,6 +9,14 @@ const deviceStorage = {
 		});
 	},
 
+	multiGet(keys) {
+		return AsyncStorage.multiGet(keys).then(values => {
+			return values.map(val => {
+				return JSON.parse(value[1]);
+			})
+		})
+	},
+
 	save(key, value) {
 		return AsyncStorage.setItem(key, JSON.stringify(value));
 	},
@@ -25,4 +33,4 @@ const deviceStorage = {
 	}
 };
 
-module.exports = deviceStorage;
+export default deviceStorage;
