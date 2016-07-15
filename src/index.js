@@ -4,7 +4,7 @@ import { AsyncStorage } from 'react-native';
 
 const deviceStorage = {
 	get(key) {
-		if(Array.isArray(key)) {
+		if(!Array.isArray(key)) {
 			return AsyncStorage.getItem(key).then(value => {
 				return JSON.parse(value);
 			});
@@ -33,4 +33,4 @@ const deviceStorage = {
 	}
 };
 
-export default deviceStorage;
+module.exports = deviceStorage;
