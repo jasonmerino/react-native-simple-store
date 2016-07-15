@@ -8,24 +8,36 @@ function getTestData() {
 	};
 }
 
+function multiGetTestData() {
+	return [
+		['key1', JSON.stringify({valor: 1})],
+		['key2', JSON.stringify({valor: 2})]
+	];
+};
+
 const INDEX_PATH = '../src/index';
 
-jest.dontMock(INDEX_PATH);
+jest.unmock(INDEX_PATH);
 
 jest.setMock('react-native', {
 	AsyncStorage: {
-		setItem: jest.genMockFunction().mockImplementation(function() {
-			return Q.promise(function(resolve) {
+		setItem: jest.fn(() => {
+			return new Promise((resolve, reject) => {
 				resolve(null);
-			});
+			})
 		}),
-		getItem: jest.genMockFunction().mockImplementation(function() {
-			return Q.promise(function(resolve) {
+		getItem: jest.fn(() => {
+			return new Promise((resolve, reject) => {
 				resolve(JSON.stringify(getTestData()));
 			})
 		}),
-		removeItem: jest.genMockFunction().mockImplementation(function() {
-			return Q.promise(function(resolve) {
+		multiGet: jest.fn(() => {
+			return new Promise((resolve, reject) => {
+				resolve(multiGetTestData());
+			})
+		}),
+		removeItem: jest.fn(() => {
+			return new Promise((resolve, reject) => {
 				resolve(null);
 			})
 		})
@@ -34,7 +46,7 @@ jest.setMock('react-native', {
 
 describe('save', function() {
 
-	pit('should return a promise with no errors', function() {
+	it('should return a promise with no errors', function() {
 		var store = require(INDEX_PATH);
 		return store.save('testing', getTestData()).then(function(error) {
 			expect(error).toEqual(null);
@@ -45,10 +57,17 @@ describe('save', function() {
 
 describe('get', function() {
 
-	pit('should return a promise with saved data', function() {
+	it('should return a promise with saved data', function() {
 		var store = require(INDEX_PATH);
 		return store.get('testing').then(function(error) {
 			expect(error).toEqual(getTestData());
+		});
+	});
+
+	it('should return a promise with saved data', function() {
+		var store = require(INDEX_PATH);
+		return store.get(['testing', 'testing']).then(function(error) {
+			expect(error).toEqual([{valor: 1}, {valor: 2}]);
 		});
 	});
 
