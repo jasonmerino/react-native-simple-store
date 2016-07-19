@@ -4,9 +4,17 @@ import { AsyncStorage } from 'react-native';
 
 const deviceStorage = {
 	get(key) {
-		return AsyncStorage.getItem(key).then(value => {
-			return JSON.parse(value);
-		});
+		if(!Array.isArray(key)) {
+			return AsyncStorage.getItem(key).then(value => {
+				return JSON.parse(value);
+			});
+		} else {
+			return AsyncStorage.multiGet(key).then(values => {
+				return values.map(value => {
+					return JSON.parse(value[1]);
+				})
+			});
+		}
 	},
 
 	save(key, value) {
