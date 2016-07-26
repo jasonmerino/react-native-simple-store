@@ -1,24 +1,74 @@
 'use strict';
+/**
+ * @overview A minimalistic wrapper around React Native's AsyncStorage.
+ * @license MIT
+ */
 
 var _reactNative = require('react-native');
 
 var deviceStorage = {
+	/**
+  * Get a one or more value for a key or array of keys from AsyncStorage
+  * @param {String|Array} key A key or array of keys
+  * @return {Promise}
+  */
+
 	get: function get(key) {
-		return _reactNative.AsyncStorage.getItem(key).then(function (value) {
-			return JSON.parse(value);
-		});
+		if (!Array.isArray(key)) {
+			return _reactNative.AsyncStorage.getItem(key).then(function (value) {
+				return JSON.parse(value);
+			});
+		} else {
+			return _reactNative.AsyncStorage.multiGet(key).then(function (values) {
+				return values.map(function (value) {
+					return JSON.parse(value[1]);
+				});
+			});
+		}
 	},
+
+
+	/**
+  * Save a key value pair to AsyncStorage.
+  * @param  {String} key The key
+  * @param  {Any} value The value to save
+  * @return {Promise}
+  */
 	save: function save(key, value) {
 		return _reactNative.AsyncStorage.setItem(key, JSON.stringify(value));
 	},
+
+
+	/**
+  * Updates the value in the store for a given key in AsyncStorage. If the value is a string it will be replaced. If the value is an object it will be extended.
+  * @param  {String} key The key
+  * @param  {Value} value The value to update with
+  * @return {Promise}
+  */
 	update: function update(key, value) {
 		return deviceStorage.get(key).then(function (item) {
 			value = typeof value === 'string' ? value : Object.assign({}, item, value);
 			return _reactNative.AsyncStorage.setItem(key, JSON.stringify(value));
 		});
 	},
+
+
+	/**
+  * Delete the value for a given key in AsyncStorage.
+  * @param  {String} key The key
+  * @return {Promise}
+  */
 	delete: function _delete(key) {
 		return _reactNative.AsyncStorage.removeItem(key);
+	},
+
+
+	/**
+  * Get all keys in AsyncStorage.
+  * @return {Promise} A promise which when it resolves gets passed the saved keys in AsyncStorage.
+  */
+	keys: function keys() {
+		return _reactNative.AsyncStorage.getAllKeys();
 	}
 };
 

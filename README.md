@@ -13,28 +13,12 @@ A minimalistic wrapper around React Native's AsyncStorage.
 npm install react-native-simple-store
 ```
 
-## API Reference
-
-`.save([String key], [Object|String value]) -> Promise(error)`
-
-Save a key and associated value.
-
-`.get([String key]) -> Promise(value)`
-
-Get a value for the given key.
-
-`.update([String key], [Object|String value]) -> Promise(error)`
-
-Update the current value for the given key with the provided value. If an object is supplied as the value it gets merged into the existing object. If a string value is supplied it will replace the previous saved value.
-
-`.delete([String key]) -> Promise(error)`
-
-Delete the value associated with a given key and remove the key.
+## [API Reference](docs/index.md)
 
 ## Example Usage
 
 ```javascript
-var store = require('react-native-simple-store');
+import store from 'react-native-simple-store';
 
 store
   .save('coffee', {

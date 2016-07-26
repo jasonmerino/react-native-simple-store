@@ -1,7 +1,5 @@
 'use strict';
 
-const Q = require('q');
-
 function getTestData() {
 	return {
 		isATest: true
@@ -24,22 +22,27 @@ jest.setMock('react-native', {
 		setItem: jest.fn(() => {
 			return new Promise((resolve, reject) => {
 				resolve(null);
-			})
+			});
 		}),
 		getItem: jest.fn(() => {
 			return new Promise((resolve, reject) => {
 				resolve(JSON.stringify(getTestData()));
-			})
+			});
 		}),
 		multiGet: jest.fn(() => {
 			return new Promise((resolve, reject) => {
 				resolve(multiGetTestData());
-			})
+			});
 		}),
 		removeItem: jest.fn(() => {
 			return new Promise((resolve, reject) => {
 				resolve(null);
-			})
+			});
+		}),
+		getAllKeys: jest.fn(() => {
+			return new Promise((resolve) => {
+				resolve(['one', 'two', 'three']);
+			});
 		})
 	}
 });
@@ -102,4 +105,13 @@ describe('delete', function() {
 		});
 	});
 
+});
+
+describe('keys', function() {
+	it('should return the keys', () => {
+		var store = require(INDEX_PATH);
+		return store.keys().then((keys) => {
+			expect(keys).toEqual(['one', 'two', 'three']);
+		});
+	});
 });
