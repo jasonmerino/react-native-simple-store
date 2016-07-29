@@ -27,12 +27,19 @@ const deviceStorage = {
 
 	/**
 	 * Save a key value pair to AsyncStorage.
-	 * @param  {String} key The key
+	 * @param  {String|Array} key The key or an array of key/value pairs
 	 * @param  {Any} value The value to save
 	 * @return {Promise}
 	 */
 	save(key, value) {
-		return AsyncStorage.setItem(key, JSON.stringify(value));
+        if(!Array.isArray(key)) {
+            return AsyncStorage.setItem(key, JSON.stringify(value));
+        } else {
+            var kvPairs = key.map(function(kvPair) {
+                return [kvPair[0], JSON.stringify(kvPair[1])];
+            });
+            return AsyncStorage.multiSet(kvPairs);
+        }
 	},
 
 	/**
