@@ -24,6 +24,11 @@ jest.setMock('react-native', {
 				resolve(null);
 			});
 		}),
+		multiSet:  jest.fn(() => {
+			return new Promise((resolve, reject) => {
+				resolve(null);
+			});
+		}),
 		getItem: jest.fn(() => {
 			return new Promise((resolve, reject) => {
 				resolve(JSON.stringify(getTestData()));
@@ -52,6 +57,13 @@ describe('save', function() {
 	it('should return a promise with no errors', function() {
 		var store = require(INDEX_PATH);
 		return store.save('testing', getTestData()).then(function(error) {
+			expect(error).toEqual(null);
+		});
+	});
+
+	it('should return a promise with no errors', function() {
+		var store = require(INDEX_PATH);
+		return store.save(multiGetTestData()).then(function(error) {
 			expect(error).toEqual(null);
 		});
 	});
