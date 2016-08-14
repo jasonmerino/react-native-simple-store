@@ -32,14 +32,14 @@ const deviceStorage = {
 	 * @return {Promise}
 	 */
 	save(key, value) {
-        if(!Array.isArray(key)) {
-            return AsyncStorage.setItem(key, JSON.stringify(value));
-        } else {
-            var kvPairs = key.map(function(kvPair) {
-                return [kvPair[0], JSON.stringify(kvPair[1])];
-            });
-            return AsyncStorage.multiSet(kvPairs);
-        }
+		if(!Array.isArray(key)) {
+			return AsyncStorage.setItem(key, JSON.stringify(value));
+		} else {
+			var kvPairs = key.map(function(kvPair) {
+				return [kvPair[0], JSON.stringify(kvPair[1])];
+			});
+			return AsyncStorage.multiSet(kvPairs);
+		}
 	},
 
 	/**
