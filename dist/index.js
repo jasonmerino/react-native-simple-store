@@ -6,7 +6,7 @@
 
 var _reactNative = require('react-native');
 
-var _lodash = require('lodash');
+var _lodash = require('lodash.merge');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -52,7 +52,7 @@ var deviceStorage = {
   */
 	update: function update(key, value) {
 		return deviceStorage.get(key).then(function (item) {
-			value = typeof value === 'string' ? value : _lodash2.default.merge({}, item, value);
+			value = typeof value === 'string' ? value : (0, _lodash2.default)({}, item, value);
 			return _reactNative.AsyncStorage.setItem(key, JSON.stringify(value));
 		});
 	},

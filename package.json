@@ -34,7 +34,7 @@
   "author": "Jason Merino",
   "license": "MIT",
   "dependencies": {
-    "lodash": "^4.14.2"
+    "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
     "babel-cli": "^6.7.7",
