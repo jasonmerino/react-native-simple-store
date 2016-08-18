@@ -6,13 +6,18 @@
 
 var _reactNative = require('react-native');
 
+var _lodash = require('lodash.merge');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var deviceStorage = {
 	/**
   * Get a one or more value for a key or array of keys from AsyncStorage
   * @param {String|Array} key A key or array of keys
   * @return {Promise}
   */
-
 	get: function get(key) {
 		if (!Array.isArray(key)) {
 			return _reactNative.AsyncStorage.getItem(key).then(function (value) {
@@ -47,7 +52,7 @@ var deviceStorage = {
   */
 	update: function update(key, value) {
 		return deviceStorage.get(key).then(function (item) {
-			value = typeof value === 'string' ? value : Object.assign({}, item, value);
+			value = typeof value === 'string' ? value : (0, _lodash2.default)({}, item, value);
 			return _reactNative.AsyncStorage.setItem(key, JSON.stringify(value));
 		});
 	},

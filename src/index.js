@@ -4,6 +4,7 @@
  * @license MIT
  */
 import { AsyncStorage } from 'react-native';
+import merge from 'lodash.merge';
 
 const deviceStorage = {
 	/**
@@ -50,7 +51,7 @@ const deviceStorage = {
 	 */
 	update(key, value) {
 		return deviceStorage.get(key).then(item => {
-			value = typeof value === 'string' ? value : Object.assign({}, item, value);
+			value = typeof value === 'string' ? value : merge({}, item, value);
 			return AsyncStorage.setItem(key, JSON.stringify(value));
 		});
 	},
