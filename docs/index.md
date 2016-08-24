@@ -19,11 +19,11 @@ Get a one or more value for a key or array of keys from AsyncStorage
 
 ### save(key, value) 
 
-Save a key value pair to AsyncStorage.
+Save a key value pair or a series of key value pairs to AsyncStorage.
 
 **Parameters**
 
-**key**: `String`, The key
+**key**: `String | Array`, The key or an array of key/value pairs
 
 **value**: `Any`, The value to save
 
@@ -32,7 +32,7 @@ Save a key value pair to AsyncStorage.
 
 ### update(key, value) 
 
-Updates the value in the store for a given key in AsyncStorage. If the value is a string it will be replaced. If the value is an object it will be extended.
+Updates the value in the store for a given key in AsyncStorage. If the value is a string it will be replaced. If the value is an object it will be deep merged.
 
 **Parameters**
 
