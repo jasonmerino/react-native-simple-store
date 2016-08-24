@@ -7,7 +7,7 @@
     "dist": "babel src -d dist",
     "gen-docs": "./node_modules/.bin/jsdox src/index.js --output docs",
     "preversion": "npm run dist -s ; npm run gen-docs -s",
-    "test": "./node_modules/.bin/jest --silent"
+    "test": "./node_modules/.bin/jest"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
