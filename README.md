@@ -21,6 +21,10 @@ npm install react-native-simple-store
 import store from 'react-native-simple-store';
 
 store
+  .get('coffee', { needMore: true })
+  .then(coffee => {
+    console.assert(coffee.needMore === true);
+  })
   .save('coffee', {
     isAwesome: true
   })
