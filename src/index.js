@@ -1,4 +1,4 @@
-'use strict';
+
 /**
  * @overview A minimalistic wrapper around React Native's AsyncStorage.
  * @license MIT
@@ -58,11 +58,15 @@ const deviceStorage = {
 
 	/**
 	 * Delete the value for a given key in AsyncStorage.
-	 * @param  {String} key The key
+	 * @param  {String|Array} key The key or an array of keys to be deleted
 	 * @return {Promise}
 	 */
 	delete(key) {
-		return AsyncStorage.removeItem(key);
+		if (Array.isArray(key)) {
+			return AsyncStorage.multiRemove(key);
+		} else {
+			return AsyncStorage.removeItem(key);
+		}
 	},
 
 	/**

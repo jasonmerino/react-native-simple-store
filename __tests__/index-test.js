@@ -1,4 +1,3 @@
-'use strict';
 
 function getTestData() {
 	return {
@@ -59,7 +58,10 @@ jest.mock('react-native', () => ({
 			return new Promise((resolve) => {
 				resolve(['one', 'two', 'three']);
 			});
-		})
+		}),
+		multiRemove: jest.fn(() => ({
+			then: jest.fn(),
+		})),
 	}
 }));
 
@@ -154,6 +156,16 @@ describe('delete', () => {
 		return store.delete('testing').then((error) => {
 			expect(error).toEqual(null);
 			expect(AsyncStorage.removeItem).toBeCalledWith('testing');
+		});
+	});
+
+  it('should handle an array of keys', () => {
+		const { AsyncStorage } = require('react-native');
+		const store = require(INDEX_PATH);
+		const keys = ['thingOne', 'thingTwo'];
+		return store.delete(keys).then((error) => {
+			expect(error).toEqual(null);
+			expect(AsyncStorage.multiRemove).toBeCalledWith(keys);
 		});
 	});
 
