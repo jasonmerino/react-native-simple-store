@@ -10,17 +10,19 @@ const deviceStorage = {
 	/**
 	 * Get a one or more value for a key or array of keys from AsyncStorage
 	 * @param {String|Array} key A key or array of keys
+	 * @param {String|Array} [defaultValue] Returned if the key(s) are null
 	 * @return {Promise}
 	 */
-	get(key) {
+	get(key, defaultValue) {
 		if(!Array.isArray(key)) {
 			return AsyncStorage.getItem(key).then(value => {
-				return JSON.parse(value);
+				return JSON.parse(value) || defaultValue;
 			});
 		} else {
 			return AsyncStorage.multiGet(key).then(values => {
-				return values.map(value => {
-					return JSON.parse(value[1]);
+				return values.map((value, index) => {
+					var defaultMulti = Array.isArray(defaultValue) ? defaultValue[index] : defaultValue;
+					return JSON.parse(value[1]) || defaultMulti;
 				});
 			});
 		}

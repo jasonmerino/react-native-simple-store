@@ -6,13 +6,15 @@
 
 * * *
 
-### get(key) 
+### get(key, defaultValue) 
 
 Get a one or more value for a key or array of keys from AsyncStorage
 
 **Parameters**
 
 **key**: `String | Array`, A key or array of keys
+
+**defaultValue**: `String | Array`, Returned if the key(s) are null
 
 **Returns**: `Promise`
 

@@ -39,14 +39,23 @@ jest.mock('react-native', () => ({
 				resolve(null);
 			});
 		}),
-		getItem: jest.fn(() => {
+		getItem: jest.fn(testKey => {
+			let returnValue = {
+				testing: JSON.stringify(getTestData()),
+				testingDefault: null
+			};
+
 			return new Promise((resolve, reject) => {
-				resolve(JSON.stringify(getTestData()));
+				resolve(returnValue[testKey]);
 			});
 		}),
-		multiGet: jest.fn(() => {
+		multiGet: jest.fn(testKeys => {
+			let returnValue = {
+				testing: multiGetTestData(),
+				testingDefault: [['testingDefault', null], ['testingDefault', null]]
+			}
 			return new Promise((resolve, reject) => {
-				resolve(multiGetTestData());
+				resolve(returnValue[testKeys[1]]);
 			});
 		}),
 		removeItem: jest.fn(() => {
@@ -94,21 +103,41 @@ describe('save', () => {
 
 describe('get', () => {
 
+	const { AsyncStorage } = require('react-native');
+	const store = require(INDEX_PATH);
+
 	it('should return a promise with saved data', () => {
-		const { AsyncStorage } = require('react-native');
-		const store = require(INDEX_PATH);
 		return store.get('testing').then((error) => {
 			expect(error).toEqual(getTestData());
 			expect(AsyncStorage.getItem).toBeCalledWith('testing');
 		});
 	});
 
+	it('should return the default value if no saved data', () => {
+		return store.get('testingDefault', 'defaultValue').then(result => {
+			expect(result).toEqual('defaultValue');
+			expect(AsyncStorage.getItem).toBeCalledWith('testingDefault');
+		});
+	});
+
 	it('should return a promise with saved data', () => {
-		const { AsyncStorage } = require('react-native');
-		const store = require(INDEX_PATH);
 		return store.get(['testing', 'testing']).then((error) => {
 			expect(error).toEqual([{valor: 1}, {valor: 2}]);
 			expect(AsyncStorage.multiGet).toBeCalledWith(['testing', 'testing']);
+		});
+	});
+
+	it('should return the default value for multiple keys if no saved data', () => {
+		return store.get(['testingDefault', 'testingDefault'], 'defaultValue').then(result => {
+			expect(result).toEqual(['defaultValue', 'defaultValue']);
+			expect(AsyncStorage.multiGet).toBeCalledWith(['testingDefault', 'testingDefault']);
+		});
+	});
+
+	it('should return the default value for multiple keys if no saved data', () => {
+		return store.get(['testingDefault', 'testingDefault'], ['defaultValue1', 'defaultValue2']).then(result => {
+			expect(result).toEqual(['defaultValue1', 'defaultValue2']);
+			expect(AsyncStorage.multiGet).toBeCalledWith(['testingDefault', 'testingDefault']);
 		});
 	});
 
