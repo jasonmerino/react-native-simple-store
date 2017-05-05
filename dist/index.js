@@ -1,8 +1,4 @@
 'use strict';
-/**
- * @overview A minimalistic wrapper around React Native's AsyncStorage.
- * @license MIT
- */
 
 var _reactNative = require('react-native');
 
@@ -12,6 +8,10 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * @overview A minimalistic wrapper around React Native's AsyncStorage.
+ * @license MIT
+ */
 var deviceStorage = {
 	/**
   * Get a one or more value for a key or array of keys from AsyncStorage
@@ -67,11 +67,15 @@ var deviceStorage = {
 
 	/**
   * Delete the value for a given key in AsyncStorage.
-  * @param  {String} key The key
+  * @param  {String|Array} key The key or an array of keys to be deleted
   * @return {Promise}
   */
 	delete: function _delete(key) {
-		return _reactNative.AsyncStorage.removeItem(key);
+		if (Array.isArray(key)) {
+			return _reactNative.AsyncStorage.multiRemove(key);
+		} else {
+			return _reactNative.AsyncStorage.removeItem(key);
+		}
 	},
 
 

@@ -49,7 +49,7 @@ Delete the value for a given key in AsyncStorage.
 
 **Parameters**
 
-**key**: `String`, The key
+**key**: `String | Array`, The key or an array of keys to be deleted
 
 **Returns**: `Promise`
 
