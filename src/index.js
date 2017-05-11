@@ -75,7 +75,24 @@ const deviceStorage = {
 	 */
 	keys() {
 		return AsyncStorage.getAllKeys();
-	}
+	},
+
+	/**
+	 * Push a value onto an array stored in AsyncStorage by key or create a new array in AsyncStorage for a key if it's not yet defined.
+	 * @param {String} key They key
+	 * @param {Any} value The value to push onto the array
+	 * @return {Promise}
+	 */
+	push(key, value) {
+		return deviceStorage.get(key).then((currentValue) => {
+			if (currentValue === null) {
+				// if there is no current value populate it with the new value
+				return deviceStorage.save(key, [value]);
+			}
+			// assume the current value is an array and recreate the array with the new value added
+			return deviceStorage.save(key, [...currentValue, value]);
+		});
+	},
 };
 
 module.exports = deviceStorage;
