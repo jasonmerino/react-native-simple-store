@@ -3,8 +3,8 @@
  * @overview A minimalistic wrapper around React Native's AsyncStorage.
  * @license MIT
  */
-import { AsyncStorage } from 'react-native';
 import merge from 'lodash.merge';
+import { AsyncStorage } from 'react-native';
 
 const deviceStorage = {
 	/**
@@ -89,8 +89,10 @@ const deviceStorage = {
 				// if there is no current value populate it with the new value
 				return deviceStorage.save(key, [value]);
 			}
-			// assume the current value is an array and recreate the array with the new value added
-			return deviceStorage.save(key, [...currentValue, value]);
+			if (Array.isArray(currentValue)) {
+				return deviceStorage.save(key, [...currentValue, value]);
+			}
+			throw new Error(`Existing value for key "${key}" must be of type null or Array, received ${typeof currentValue}.`);
 		});
 	},
 };

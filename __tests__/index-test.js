@@ -206,6 +206,13 @@ describe('index.js', () => {
 				expect(AsyncStorage.setItem).toBeCalledWith(key, JSON.stringify(['red', 'blue', value]));
 			})
 		});
+		it('should throw an error if saved value for key is neither null nor array', () => {
+			const key = 'stringOne';
+			const value = 'green';
+			return store.push(key, value).catch((error) => {
+				expect(error.message).toEqual('Existing value for key "stringOne" must be of type null or Array, received string.');
+			});
+		});
 	});
 
 });
