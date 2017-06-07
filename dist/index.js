@@ -1,17 +1,22 @@
 'use strict';
 
-var _reactNative = require('react-native');
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _lodash = require('lodash.merge');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _reactNative = require('react-native');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 /**
  * @overview A minimalistic wrapper around React Native's AsyncStorage.
  * @license MIT
  */
+
+
 var deviceStorage = {
 	/**
   * Get a one or more value for a key or array of keys from AsyncStorage
@@ -85,6 +90,26 @@ var deviceStorage = {
   */
 	keys: function keys() {
 		return _reactNative.AsyncStorage.getAllKeys();
+	},
+
+
+	/**
+  * Push a value onto an array stored in AsyncStorage by key or create a new array in AsyncStorage for a key if it's not yet defined.
+  * @param {String} key They key
+  * @param {Any} value The value to push onto the array
+  * @return {Promise}
+  */
+	push: function push(key, value) {
+		return deviceStorage.get(key).then(function (currentValue) {
+			if (currentValue === null) {
+				// if there is no current value populate it with the new value
+				return deviceStorage.save(key, [value]);
+			}
+			if (Array.isArray(currentValue)) {
+				return deviceStorage.save(key, [].concat(_toConsumableArray(currentValue), [value]));
+			}
+			throw new Error('Existing value for key "' + key + '" must be of type null or Array, received ' + (typeof currentValue === 'undefined' ? 'undefined' : _typeof(currentValue)) + '.');
+		});
 	}
 };
 

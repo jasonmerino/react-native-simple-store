@@ -61,6 +61,19 @@ Get all keys in AsyncStorage.
 **Returns**: `Promise`, A promise which when it resolves gets passed the saved keys in AsyncStorage.
 
 
+### push(key, value) 
+
+Push a value onto an array stored in AsyncStorage by key or create a new array in AsyncStorage for a key if it's not yet defined.
+
+**Parameters**
+
+**key**: `String`, They key
+
+**value**: `Any`, The value to push onto the array
+
+**Returns**: `Promise`
+
+
 
 * * *
 
