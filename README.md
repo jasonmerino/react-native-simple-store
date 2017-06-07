@@ -17,7 +17,7 @@ npm install react-native-simple-store
 
 ## Example Usage
 
-```javascript
+```js
 import store from 'react-native-simple-store';
 
 store
@@ -44,6 +44,13 @@ store
   .catch(error => {
     console.error(error.message);
   });
+
+// using the .push method for storing arrays
+store
+  .save('coffeeTraits', ['rich'])
+  .then(store.push('coffeeTraits', 'smooth'))
+  .then(store.get('coffeeTraits'))
+  .then(console.log) // ['rich', 'smooth']
 ```
 
 ## License

@@ -3,8 +3,8 @@
  * @overview A minimalistic wrapper around React Native's AsyncStorage.
  * @license MIT
  */
-import { AsyncStorage } from 'react-native';
 import merge from 'lodash.merge';
+import { AsyncStorage } from 'react-native';
 
 const deviceStorage = {
 	/**
@@ -75,7 +75,26 @@ const deviceStorage = {
 	 */
 	keys() {
 		return AsyncStorage.getAllKeys();
-	}
+	},
+
+	/**
+	 * Push a value onto an array stored in AsyncStorage by key or create a new array in AsyncStorage for a key if it's not yet defined.
+	 * @param {String} key They key
+	 * @param {Any} value The value to push onto the array
+	 * @return {Promise}
+	 */
+	push(key, value) {
+		return deviceStorage.get(key).then((currentValue) => {
+			if (currentValue === null) {
+				// if there is no current value populate it with the new value
+				return deviceStorage.save(key, [value]);
+			}
+			if (Array.isArray(currentValue)) {
+				return deviceStorage.save(key, [...currentValue, value]);
+			}
+			throw new Error(`Existing value for key "${key}" must be of type null or Array, received ${typeof currentValue}.`);
+		});
+	},
 };
 
 module.exports = deviceStorage;
