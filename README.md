@@ -13,45 +13,22 @@ A minimalistic wrapper around React Native's AsyncStorage.
 npm install react-native-simple-store
 ```
 
-## [API Reference](docs/index.md)
+## Use In Project
+```
+import store from 'react-native-simple-store;
+```
 
 ## Example Usage
 
-```js
-import store from 'react-native-simple-store';
+### Save New Data
+We'll use two different ways to create new persistent storage under the key 'albums'. First example creates an object, the second creates an array.
 
-store
-  .save('coffee', {
-    isAwesome: true
-  })
-  .then(() => store.get('coffee'))
-  .then(coffee => {
-    console.assert(coffee.isAwesome === true);
-  })
-  .then(() => store.update('coffee', {
-    isNotEssential: false
-  }))
-  .then(() => store.get('coffee'))
-  .then(coffee => {
-    console.assert(coffee.isNotEssential === false);
-    console.assert(coffee.isAwesome === true);
-    return store.delete('coffee');
-  })
-  .then(() => store.get('coffee'))
-  .then(coffee => {
-    console.assert(coffee === null);
-  })
-  .catch(error => {
-    console.error(error.message);
-  });
-
-// using the .push method for storing arrays
-store
-  .save('coffeeTraits', ['rich'])
-  .then(store.push('coffeeTraits', 'smooth'))
-  .then(store.get('coffeeTraits'))
-  .then(console.log) // ['rich', 'smooth']
 ```
+store.save('albums', {
+	
+})
+```
+
 
 ## License
 
