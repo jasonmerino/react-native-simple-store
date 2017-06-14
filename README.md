@@ -18,16 +18,46 @@ npm install react-native-simple-store
 import store from 'react-native-simple-store;
 ```
 
-## Example Usage
+### Example Usage
 
-### Save New Data
-We'll use two different ways to create new persistent storage under the key 'albums'. First example creates an object, the second creates an array.
 
-```
-store.save('albums', {
+----------
+
+ - [Basic Object Handling](#objects)
+ - [Basic Array Handling](#arrays)
+ - [Chaining Methods/Error Handling](#chaining)
+
+
+#### Working With Objects
+
+----------
+React-native-simple-store allows you to easily store data by assigning it a unique key. We will show you a few examples of just how easy it is to get started.
+
+	// Save some data as an object named 'album' to
+	// a users device.
+	   
+    store.save('album', {
+	    artist: 'Twenty One Pilots'
+	})
 	
-})
-```
+	// Retrieve the object from the user's device
+	store.get('album')
+	.then((res) =>
+		console.log(res.artist) // 'Twenty One Pilots'
+	)
+
+	// Update the object stored under the key 'album'
+	store.update('album', {
+		albumName: 'Blurry Face'
+	})
+
+	// Get updated data
+	store.get('album')
+	.then((res) =>
+		console.log(res.albumName) // 'Blurry Face'
+	)
+
+
 
 
 ## License
