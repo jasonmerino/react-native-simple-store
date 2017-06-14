@@ -34,7 +34,7 @@ import store from 'react-native-simple-store;
 ----------
 React-native-simple-store allows you to easily store data by assigning it a unique key. We will show you a few examples of just how easy it is to get started.
 
-### Save and Retrieval
+#### Save and Retrieval
 
 	// Save an object to a users device. We will assign it a key of 'album' for easy retrieval	   
     store.save('album', {
@@ -47,7 +47,7 @@ React-native-simple-store allows you to easily store data by assigning it a uniq
 	   console.log(res.artist) // 'Twenty One Pilots'
 	)
 	
-### Updating 
+#### Updating 
 	// Update the object stored under the key 'album'. We will add a new property of 'albumName' to this object.
 	store.update('album', {
 	   albumName: 'Blurry Face'
@@ -66,6 +66,14 @@ React-native-simple-store allows you to easily store data by assigning it a uniq
 	}
 
 
+### Working With Arrays
+
+----------
+Arrays are easy to work with using react-native-simple-store's built-in "push" method. You can use the "push" method to create an array, or add data to the array. Behind the scene's react-native-simple-store will check if an array exists under the key you specified, if it does, it will add the new specified data to the existing array. If it does not exist, it will create the array for you.
+
+#### Array Creation
+	// Save an array to the users device. We will give it the key 'shoppingList' for easy retrieval
+	store.push('shoppingList', 'milk')
 
 
 
