@@ -28,7 +28,7 @@ import store from 'react-native-simple-store;
  - [Chaining Methods/Error Handling](#chaining)
 
 
-
+<a name="objects"></a>
 ### Working With Objects
 
 ----------
@@ -68,7 +68,7 @@ React-native-simple-store allows you to easily store data by assigning it a uniq
 	}
 
 
-
+<a name="arrays"></a>
 ### Working With Arrays
 
 ----------
@@ -133,7 +133,7 @@ Instead of storing strings in an array like the above example, let's store objec
 	
 	
 
-
+<a name="chaining"></a>
 ### Chaining Methods/Error Handling
 
 ----------
