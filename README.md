@@ -28,10 +28,13 @@ import store from 'react-native-simple-store;
  - [Chaining Methods/Error Handling](#chaining)
 
 
-#### Working With Objects
+
+### Working With Objects
 
 ----------
 React-native-simple-store allows you to easily store data by assigning it a unique key. We will show you a few examples of just how easy it is to get started.
+
+### Save and Retrieval
 
 	// Save some data as an object named 'album' to
 	// a users device.
@@ -46,16 +49,6 @@ React-native-simple-store allows you to easily store data by assigning it a uniq
 		console.log(res.artist) // 'Twenty One Pilots'
 	)
 
-	// Update the object stored under the key 'album'
-	store.update('album', {
-		albumName: 'Blurry Face'
-	})
-
-	// Get updated data
-	store.get('album')
-	.then((res) =>
-		console.log(res.albumName) // 'Blurry Face'
-	)
 
 
 
