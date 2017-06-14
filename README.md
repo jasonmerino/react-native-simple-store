@@ -18,7 +18,7 @@ npm install react-native-simple-store
 import store from 'react-native-simple-store;
 ```
 
-### Example Usage
+## Example Usage
 
 
 ----------
@@ -34,7 +34,8 @@ import store from 'react-native-simple-store;
 ----------
 React-native-simple-store allows you to easily store data by assigning it a unique key. We will show you a few examples of just how easy it is to get started.
 
-#### Save and Retrieval
+
+#### Saving and Retrieval
 
 	// Save an object to a users device. We will assign it a key of 'album' for easy retrieval	   
     store.save('album', {
@@ -46,7 +47,8 @@ React-native-simple-store allows you to easily store data by assigning it a uniq
 	.then((res) =>
 	   console.log(res.artist) // 'Twenty One Pilots'
 	)
-	
+
+
 #### Updating 
 	// Update the object stored under the key 'album'. We will add a new property of 'albumName' to this object.
 	store.update('album', {
@@ -66,16 +68,19 @@ React-native-simple-store allows you to easily store data by assigning it a uniq
 	}
 
 
+
 ### Working With Arrays
 
 ----------
 Arrays are easy to work with using react-native-simple-store's built-in "push" method. You can use the "push" method to create an array, or add data to the array. Behind the scene's react-native-simple-store will check if an array exists under the key you specified, if it does, it will add the new specified data to the existing array. If it does not exist, it will create the array for you.
+
 
 #### Array Creation
 	// Save an array to the users device. We will give it the key 'shoppingList' for easy retrieval	
 	store.push('shoppingList', 'milk') 
 	
 	// ['milk'] is created and stored on the users device
+
 
 #### Retrieval and Updating
 	// Get the array from the users device
@@ -92,6 +97,41 @@ Arrays are easy to work with using react-native-simple-store's built-in "push" m
 	.then((res) =>
 	   console.log(res) // ['milk', 'eggs']
 	)
+
+
+#### More "Advanced" Example
+Instead of storing strings in an array like the above example, let's store objects. We will create a new array to store on the user's device named 'artists'.
+
+	const femaleArtist = {
+	   name: 'Lady Gaga',
+	   age: 31,
+	   gender: 'female'
+	}
+	
+	const maleArtist = {
+	   name: 'The Weeknd',
+	   age: 27,
+	   gender: 'male'
+	}
+	
+	store.push('artists', femaleArtist) // Creates a new array, and inserts this object into it.
+	store.push('artists', maleArtist) // Adds this new object to the end of the array.
+	
+	// Our new object will look like this when we retrieve it
+	[
+	   {
+	      name: 'Lady Gaga',
+	      age: 31,
+	      gender: 'female'
+	   },
+	   {
+	      name: 'The Weeknd',
+	      age: 27,
+	      gender: 'male'
+	   }
+	]
+	
+	
 
 
 ### Chaining Methods/Error Handling
