@@ -73,7 +73,8 @@ Arrays are easy to work with using react-native-simple-store's built-in "push" m
 
 #### Array Creation
 	// Save an array to the users device. We will give it the key 'shoppingList' for easy retrieval
-	store.push('shoppingList', 'milk')
+	
+	store.push('shoppingList', 'milk') // ['milk'] is created and stored on the users device
 
 
 
