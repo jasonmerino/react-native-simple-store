@@ -93,6 +93,44 @@ Arrays are easy to work with using react-native-simple-store's built-in "push" m
 	   console.log(res) // ['milk', 'eggs']
 	)
 
+
+### Chaining Methods/Error Handling
+
+----------
+You can chain these methods as much as you'd like, as well as catch errors. Here is a lengthy example for you to reference.
+
+	store
+	  .save('coffee', {
+	    isAwesome: true
+	  })
+	  .then(() => store.get('coffee'))
+	  .then(coffee => {
+	    console.assert(coffee.isAwesome === true);
+	  })
+	  .then(() => store.update('coffee', {
+	    isNotEssential: false
+	  }))
+	  .then(() => store.get('coffee'))
+	  .then(coffee => {
+	    console.assert(coffee.isNotEssential === false);
+	    console.assert(coffee.isAwesome === true);
+	    return store.delete('coffee');
+	  })
+	  .then(() => store.get('coffee'))
+	  .then(coffee => {
+	    console.assert(coffee === null);
+	  })
+	  .catch(error => {
+	    console.error(error.message);
+	  });
+
+	// using the .push method for storing arrays
+	store
+	  .save('coffeeTraits', ['rich'])
+	  .then(store.push('coffeeTraits', 'smooth'))
+	  .then(store.get('coffeeTraits'))
+	  .then(console.log) // ['rich', 'smooth']
+
 ## License
 
 MIT
