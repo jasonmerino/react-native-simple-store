@@ -96,7 +96,7 @@ Arrays are easy to work with using react-native-simple-store's built-in "push" m
 	// Retrieve new array
 	store.get('shoppingList')
 	.then((res) =>
-	   console.log(res) // ['milk', 'eggs']
+	   console.log(res) // ['milk', 'coffee']
 	)
 
 
