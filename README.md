@@ -26,6 +26,7 @@ import store from 'react-native-simple-store;
  - [Basic Object Handling](#objects)
  - [Basic Array Handling](#arrays)
  - [Chaining Methods/Error Handling](#chaining)
+ - [Deleting](#delete)
 
 
 <a name="objects"></a>
@@ -170,6 +171,17 @@ You can chain these methods as much as you'd like, as well as catch errors. Here
 	  .then(store.push('coffeeTraits', 'smooth'))
 	  .then(store.get('coffeeTraits'))
 	  .then(console.log) // ['rich', 'smooth']
+
+
+
+<a name="delete"></a>
+### Deleting Data
+
+----------
+Deleting the data on the user's device is just as easy. Just insert the key of the data you want to remove as the argument to the "delete" method, and you are done!
+
+	store.delete('album') // Bye bye 
+
 
 ## License
 
