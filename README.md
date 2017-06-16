@@ -42,33 +42,33 @@ React-native-simple-store allows you to easily store data by assigning it a uniq
 #### Saving and Retrieval
 
 	// Save an object to a users device. We will assign it a key of 'album' for easy retrieval	   
-    store.save('album', {
-	   artist: 'Twenty One Pilots'
+	store.save('album', {
+		artist: 'Twenty One Pilots'
 	})
-	
+
 	// Retrieve the object from the user's device
 	store.get('album')
 	.then((res) =>
-	   console.log(res.artist) // 'Twenty One Pilots'
+		console.log(res.artist) // 'Twenty One Pilots'
 	)
 
 
 #### Updating 
 	// Update the object stored under the key 'album'. We will add a new property of 'albumName' to this object.
 	store.update('album', {
-	   albumName: 'Blurry Face'
+		albumName: 'Blurry Face'
 	})
 
 	// Get updated object
 	store.get('album')
 	.then((res) =>
-	   console.log(res.albumName) // 'Blurry Face'
+		console.log(res.albumName) // 'Blurry Face'
 	)
-	
+
 	// Our object stored under the key 'album' now looks like this
 	{
-	   artist: 'Twenty One Pilots',
-	   albumName: 'Blurry Face'
+	artist: 'Twenty One Pilots',
+		albumName: 'Blurry Face'
 	}
 
 
@@ -90,16 +90,16 @@ Arrays are easy to work with using react-native-simple-store's built-in "push" m
 	// Get the array from the users device
 	store.get('shoppingList')
 	.then((res) =>
-	   console.log(res) // ['milk']
+		console.log(res) // ['milk']
 	)
-	
+
 	// Add data to 'shoppingList'
 	store.push('shoppingList', 'coffee')
-	
+
 	// Retrieve new array
 	store.get('shoppingList')
 	.then((res) =>
-	   console.log(res) // ['milk', 'coffee']
+		console.log(res) // ['milk', 'coffee']
 	)
 
 
@@ -107,32 +107,32 @@ Arrays are easy to work with using react-native-simple-store's built-in "push" m
 Instead of storing strings in an array like the above example, let's store objects. We will create a new array to store on the user's device named 'artists'.
 
 	const femaleArtist = {
-	   name: 'Lady Gaga',
-	   age: 31,
-	   gender: 'female'
+		name: 'Lady Gaga',
+		age: 31,
+		gender: 'female'
 	}
-	
+
 	const maleArtist = {
-	   name: 'The Weeknd',
-	   age: 27,
-	   gender: 'male'
+		name: 'The Weeknd',
+		age: 27,
+		gender: 'male'
 	}
-	
+
 	store.push('artists', femaleArtist) // Creates a new array, and inserts this object into it.
 	store.push('artists', maleArtist) // Adds this new object to the end of the array.
-	
-	// Our new object will look like this when we retrieve it
+
+	// Our new array will look like this when we retrieve it
 	[
-	   {
-	      name: 'Lady Gaga',
-	      age: 31,
-	      gender: 'female'
-	   },
-	   {
-	      name: 'The Weeknd',
-	      age: 27,
-	      gender: 'male'
-	   }
+		{
+			name: 'Lady Gaga',
+			age: 31,
+			gender: 'female'
+		},
+		{
+			name: 'The Weeknd',
+			age: 27,
+			gender: 'male'
+		}
 	]
 	
 	
