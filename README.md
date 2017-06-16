@@ -23,13 +23,12 @@ import store from 'react-native-simple-store;
 
 ----------
 
- - [Basic Object Handling](#objects)
+ - [Basic Object Handling](#working-with-objects)
  - [Basic Array Handling](#arrays)
  - [Chaining Methods/Error Handling](#chaining)
  - [Deleting](#delete)
 
 
-<a name="objects"></a>
 ### Working With Objects
 
 ----------
