@@ -26,7 +26,7 @@ import store from 'react-native-simple-store;
  - [Basic Object Handling](#working-with-objects)
  - [Basic Array Handling](#working-with-arrays)
  - [Chaining Methods/Error Handling](#chaining)
- - [Deleting](#deleting)
+ - [Deleting](#deleting-data)
 
 
 ### Working With Objects
