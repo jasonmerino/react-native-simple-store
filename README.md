@@ -24,9 +24,9 @@ import store from 'react-native-simple-store;
 ----------
 
  - [Basic Object Handling](#working-with-objects)
- - [Basic Array Handling](#arrays)
+ - [Basic Array Handling](#working-with-arrays)
  - [Chaining Methods/Error Handling](#chaining)
- - [Deleting](#delete)
+ - [Deleting](#deleting)
 
 
 ### Working With Objects
@@ -133,8 +133,7 @@ Instead of storing strings in an array like the above example, let's store objec
 	
 	
 
-<a name="chaining"></a>
-### Chaining Methods/Error Handling
+### Chaining
 
 ----------
 You can chain these methods as much as you'd like, as well as catch errors. Here is a lengthy example for you to reference.
@@ -173,7 +172,6 @@ You can chain these methods as much as you'd like, as well as catch errors. Here
 
 
 
-<a name="delete"></a>
 ### Deleting Data
 
 ----------
