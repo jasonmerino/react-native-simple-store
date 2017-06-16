@@ -18,6 +18,10 @@ npm install react-native-simple-store
 import store from 'react-native-simple-store;
 ```
 
+
+## [API Reference](docs/index.md)
+<br />
+
 ## Example Usage
 
 
