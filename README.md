@@ -187,3 +187,4 @@ Deleting the data on the user's device is just as easy. Just insert the key of t
 ## License
 
 MIT
+ 
