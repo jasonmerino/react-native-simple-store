@@ -41,16 +41,6 @@ React-native-simple-store allows you to easily store data by assigning it a uniq
 
 #### Saving and Retrieval
 
-	// Save an object to a users device. We will assign it a key of 'album' for easy retrieval	   
-	store.save('album', {
-		artist: 'Twenty One Pilots'
-	})
-
-	// Retrieve the object from the user's device
-	store.get('album')
-	.then((res) =>
-		console.log(res.artist) // 'Twenty One Pilots'
-	)
 
 
 #### Updating 
