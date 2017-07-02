@@ -15,7 +15,7 @@ npm install react-native-simple-store
 
 ## Use In Project
 ```
-import store from 'react-native-simple-store;
+import store from 'react-native-simple-store';
 ```
 
 
