@@ -7,6 +7,8 @@
 
 A minimalistic wrapper around React Native's AsyncStorage.
 
+_The `react-native-simple-store` is a good match for apps that are **not using redux**. If you have already found that your app needs to use redux and you need to persist data to the device it is recommended that you make use of [redux-persist](https://github.com/rt2zz/redux-persist) which provides a clean interface for storing data in your reducers to device._ 
+
 ## Installation
 
 ```bash
@@ -43,7 +45,7 @@ React-native-simple-store allows you to easily store data by assigning it a uniq
 
 
 
-#### Updating 
+#### Updating
 	// Update the object stored under the key 'album'. We will add a new property of 'albumName' to this object.
 	store.update('album', {
 		albumName: 'Blurry Face'
@@ -70,9 +72,9 @@ Arrays are easy to work with using react-native-simple-store's built-in "push" m
 
 
 #### Array Creation
-	// Save an array to the users device. We will give it the key 'shoppingList' for easy retrieval	
-	store.push('shoppingList', 'milk') 
-	
+	// Save an array to the users device. We will give it the key 'shoppingList' for easy retrieval
+	store.push('shoppingList', 'milk')
+
 	// ['milk'] is created and stored on the users device
 
 
@@ -124,8 +126,8 @@ Instead of storing strings in an array like the above example, let's store objec
 			gender: 'male'
 		}
 	]
-	
-	
+
+
 
 ### Chaining
 
@@ -133,36 +135,36 @@ Instead of storing strings in an array like the above example, let's store objec
 You can chain these methods as much as you'd like, as well as catch errors. Here is a lengthy example for you to reference.
 
 	store
-	  .save('coffee', {
-	    isAwesome: true
-	  })
-	  .then(() => store.get('coffee'))
-	  .then(coffee => {
-	    console.assert(coffee.isAwesome === true);
-	  })
-	  .then(() => store.update('coffee', {
-	    isNotEssential: false
-	  }))
-	  .then(() => store.get('coffee'))
-	  .then(coffee => {
-	    console.assert(coffee.isNotEssential === false);
-	    console.assert(coffee.isAwesome === true);
-	    return store.delete('coffee');
-	  })
-	  .then(() => store.get('coffee'))
-	  .then(coffee => {
-	    console.assert(coffee === null);
-	  })
-	  .catch(error => {
-	    console.error(error.message);
-	  });
+		.save('coffee', {
+			isAwesome: true
+		})
+		.then(() => store.get('coffee'))
+		.then(coffee => {
+			console.assert(coffee.isAwesome === true);
+		})
+		.then(() => store.update('coffee', {
+			isNotEssential: false
+		}))
+		.then(() => store.get('coffee'))
+		.then(coffee => {
+			console.assert(coffee.isNotEssential === false);
+			console.assert(coffee.isAwesome === true);
+			return store.delete('coffee');
+		})
+		.then(() => store.get('coffee'))
+		.then(coffee => {
+			console.assert(coffee === null);
+		})
+		.catch(error => {
+			console.error(error.message);
+		});
 
 	// using the .push method for storing arrays
 	store
-	  .save('coffeeTraits', ['rich'])
-	  .then(store.push('coffeeTraits', 'smooth'))
-	  .then(store.get('coffeeTraits'))
-	  .then(console.log) // ['rich', 'smooth']
+		.save('coffeeTraits', ['rich'])
+		.then(store.push('coffeeTraits', 'smooth'))
+		.then(store.get('coffeeTraits'))
+		.then(console.log) // ['rich', 'smooth']
 
 
 
@@ -171,10 +173,9 @@ You can chain these methods as much as you'd like, as well as catch errors. Here
 ----------
 Deleting the data on the user's device is just as easy. Just insert the key of the data you want to remove as the argument to the "delete" method, and you are done!
 
-	store.delete('album') // Bye bye 
+	store.delete('album') // Bye bye
 
 
 ## License
 
 MIT
- 
