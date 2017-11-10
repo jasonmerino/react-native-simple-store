@@ -8,6 +8,7 @@ const returnValues = {
 		}
 	}),
 	stringOne: JSON.stringify('testing string'),
+	testMap: JSON.stringify({1: 'one', 2: 'two'}),
 };
 
 function multiGetTestData() {
@@ -103,6 +104,17 @@ describe('index.js', () => {
 			return store.save(multiSaveTestData()).then((error) => {
 				expect(error).toEqual(null);
 				expect(AsyncStorage.multiSet).toBeCalledWith(result);
+			});
+		});
+
+		it('should save an ES6 Map as an object', () => {
+			let testMap = new Map();
+			testMap.set(1, 'one');
+			testMap.set(2, 'two');
+
+			return store.save('testMap', testMap).then((error) => {
+				expect(error).toEqual(null);
+				expect(AsyncStorage.setItem).toBeCalledWith('testMap', returnValues.testMap);
 			});
 		});
 

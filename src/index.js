@@ -33,6 +33,15 @@ const deviceStorage = {
 	 * @return {Promise}
 	 */
 	save(key, value) {
+		if (value instanceof Map) {
+			let obj = Object.create(null);
+
+			for (let [k, v] of value) {
+				obj[k] = v;
+			}
+
+			return AsyncStorage.setItem(key, JSON.stringify(obj));
+		}
 		if(!Array.isArray(key)) {
 			return AsyncStorage.setItem(key, JSON.stringify(value));
 		} else {
