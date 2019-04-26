@@ -1,10 +1,9 @@
-
 /**
  * @overview A minimalistic wrapper around React Native's AsyncStorage.
  * @license MIT
  */
 import merge from 'lodash.merge';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const deviceStorage = {
 	/**
