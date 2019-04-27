@@ -1,5 +1,4 @@
-
-const returnValues = {
+const mockReturnValues = {
 	arrayOne: JSON.stringify(['red', 'blue']),
 	objectOne: JSON.stringify({
 		isATest: true,
@@ -10,14 +9,14 @@ const returnValues = {
 	stringOne: JSON.stringify('testing string'),
 };
 
-function multiGetTestData() {
+function mockMultiGetTestData() {
 	return [
 		['key1', JSON.stringify({ valor: 1 })],
 		['key2', JSON.stringify({ valor: 2 })],
 	];
 };
 
-function multiSaveTestData() {
+function mockMultiSaveTestData() {
 	return [
 		['key1', { valor: 1 }],
 		['key2', { valor: 2 }],
