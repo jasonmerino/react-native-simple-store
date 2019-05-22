@@ -1,5 +1,4 @@
-
-const returnValues = {
+const mockReturnValues = {
 	arrayOne: JSON.stringify(['red', 'blue']),
 	objectOne: JSON.stringify({
 		isATest: true,
@@ -10,88 +9,73 @@ const returnValues = {
 	stringOne: JSON.stringify('testing string'),
 };
 
-function multiGetTestData() {
+function mockMultiGetTestData() {
 	return [
 		['key1', JSON.stringify({ valor: 1 })],
 		['key2', JSON.stringify({ valor: 2 })],
 	];
-};
+}
 
-function multiSaveTestData() {
+function mockMultiSaveTestData() {
 	return [
 		['key1', { valor: 1 }],
 		['key2', { valor: 2 }],
 	];
-};
+}
 
-const INDEX_PATH = '../src/index';
-
-jest.unmock(INDEX_PATH);
-jest.unmock('lodash.merge');
-
-jest.mock('react-native', () => ({
-	AsyncStorage: {
-		setItem: jest.fn(() => {
-			return new Promise((resolve) => {
+import AsyncStorage from '@react-native-community/async-storage';
+jest.mock('@react-native-community/async-storage', () => ({
+	setItem: jest.fn(() => {
+		return new Promise((resolve) => {
+			resolve(null);
+		});
+	}),
+	multiSet:  jest.fn(() => {
+		return new Promise((resolve) => {
+			resolve(null);
+		});
+	}),
+	getItem: jest.fn((key) => {
+		return new Promise((resolve) => {
+			if (mockReturnValues[key]) {
+				resolve(mockReturnValues[key]);
+			} else {
 				resolve(null);
-			});
-		}),
-		multiSet:  jest.fn(() => {
-			return new Promise((resolve) => {
-				resolve(null);
-			});
-		}),
-		getItem: jest.fn((key) => {
-			return new Promise((resolve) => {
-				if (returnValues[key]) {
-					resolve(returnValues[key]);
-				} else {
-					resolve(null);
-				}
-			});
-		}),
-		multiGet: jest.fn(() => {
-			return new Promise((resolve) => {
-				resolve(multiGetTestData());
-			});
-		}),
-		removeItem: jest.fn(() => {
-			return new Promise((resolve) => {
-				resolve(null);
-			});
-		}),
-		getAllKeys: jest.fn(() => {
-			return new Promise((resolve) => {
-				resolve(['one', 'two', 'three']);
-			});
-		}),
-		multiRemove: jest.fn(() => ({
-			then: jest.fn(),
-		})),
-	}
+			}
+		});
+	}),
+	multiGet: jest.fn(() => {
+		return new Promise((resolve) => {
+			resolve(mockMultiGetTestData());
+		});
+	}),
+	removeItem: jest.fn(() => {
+		return new Promise((resolve) => {
+			resolve(null);
+		});
+	}),
+	getAllKeys: jest.fn(() => {
+		return new Promise((resolve) => {
+			resolve(['one', 'two', 'three']);
+		});
+	}),
+	multiRemove: jest.fn(() => ({
+		then: jest.fn(),
+	})),
 }));
 
+import store from "../src/index";
+jest.unmock("../src/index");
+jest.unmock('lodash.merge');
+
 describe('index.js', () => {
-
-	const { AsyncStorage } = require('react-native');
-	const store = require(INDEX_PATH);
-
-	beforeEach(() => {
-		AsyncStorage.setItem.mockClear();
-		AsyncStorage.multiSet.mockClear();
-		AsyncStorage.getItem.mockClear();
-		AsyncStorage.multiGet.mockClear();
-		AsyncStorage.removeItem.mockClear();
-		AsyncStorage.getAllKeys.mockClear();
-		AsyncStorage.multiRemove.mockClear();
-	});
 
 	describe('save', () => {
 
 		it('should return a promise with no errors', () => {
-			return store.save('objectOne', JSON.parse(returnValues.objectOne)).then((error) => {
+			return store.save('objectOne', JSON.parse(mockReturnValues.objectOne)).then((error) => {
 				expect(error).toEqual(null);
-				expect(AsyncStorage.setItem).toBeCalledWith('objectOne', returnValues.objectOne);
+				expect(AsyncStorage.setItem).toBeCalledWith('objectOne', mockReturnValues.objectOne);
 			});
 		});
 
@@ -100,7 +84,7 @@ describe('index.js', () => {
 				['key1', JSON.stringify({ valor: 1 })],
 				['key2', JSON.stringify({ valor: 2 })],
 			];
-			return store.save(multiSaveTestData()).then((error) => {
+			return store.save(mockMultiSaveTestData()).then((error) => {
 				expect(error).toEqual(null);
 				expect(AsyncStorage.multiSet).toBeCalledWith(result);
 			});
@@ -112,7 +96,7 @@ describe('index.js', () => {
 
 		it('should return a promise with saved data', () => {
 			return store.get('objectOne').then((error) => {
-				expect(error).toEqual(JSON.parse(returnValues.objectOne));
+				expect(error).toEqual(JSON.parse(mockReturnValues.objectOne));
 				expect(AsyncStorage.getItem).toBeCalledWith('objectOne');
 			});
 		});
@@ -148,8 +132,6 @@ describe('index.js', () => {
 		});
 
 		it('should handle a string and return a promise with no errors', () => {
-			const { AsyncStorage } = require('react-native');
-			const store = require(INDEX_PATH);
 			return store.update('stringOne', 'asdf').then((error) => {
 				expect(error).toEqual(null);
 				expect(AsyncStorage.setItem).toBeCalledWith('stringOne', JSON.stringify('asdf'));

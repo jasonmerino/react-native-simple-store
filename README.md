@@ -10,9 +10,14 @@ A minimalistic wrapper around React Native's AsyncStorage.
 _The `react-native-simple-store` is a good match for apps that are **not using redux**. If you have already found that your app needs to use redux and you need to persist data to the device it is recommended that you make use of [redux-persist](https://github.com/rt2zz/redux-persist) which provides a clean interface for storing data in your reducers to device._ 
 
 ## Installation
-
 ```bash
 npm install react-native-simple-store
+```
+
+Since this wrapper uses [react-native-async-storage](https://github.com/react-native-community/react-native-async-storage), it needs to be linked to work properly:
+
+```
+react-native link @react-native-community/async-storage
 ```
 
 ## Use In Project
