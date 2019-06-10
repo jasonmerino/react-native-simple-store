@@ -1,6 +1,6 @@
 module.exports = (api) => {
-	api.cache(true);
-
+	//api.cache(true);
+	// throws bundling failed: TypeError: Cannot read property 'cache' of undefined is same cases
 	return {
 		presets: [
 			"@babel/preset-env",
