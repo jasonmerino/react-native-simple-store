@@ -31,7 +31,7 @@
   "author": "Jason Merino",
   "license": "MIT",
   "dependencies": {
-    "lodash.merge": "4.6.0",
+    "lodash.merge": "4.6.2",
     "@react-native-community/async-storage": "1.3.3"
   },
   "devDependencies": {
