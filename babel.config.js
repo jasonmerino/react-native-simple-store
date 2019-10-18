@@ -1,5 +1,9 @@
 module.exports = (api) => {
-	//api.cache(true);
+
+	if (api && api.cache) {
+		api.cache(true);
+	}
+	
 	// throws bundling failed: TypeError: Cannot read property 'cache' of undefined is same cases
 	return {
 		presets: [
