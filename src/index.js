@@ -13,11 +13,11 @@ const deviceStorage = {
 	 */
 	get(key) {
 		if(!Array.isArray(key)) {
-			return AsyncStorage.getItem(key).then(value => {
+			return AsyncStorage.get(key).then(value => {
 				return JSON.parse(value);
 			});
 		} else {
-			return AsyncStorage.multiGet(key).then(values => {
+			return AsyncStorage.getMultiple(key).then(values => {
 				return values.map(value => {
 					return JSON.parse(value[1]);
 				});
@@ -33,12 +33,12 @@ const deviceStorage = {
 	 */
 	save(key, value) {
 		if(!Array.isArray(key)) {
-			return AsyncStorage.setItem(key, JSON.stringify(value));
+			return AsyncStorage.set(key, JSON.stringify(value));
 		} else {
 			var pairs = key.map(function(pair) {
 				return [pair[0], JSON.stringify(pair[1])];
 			});
-			return AsyncStorage.multiSet(pairs);
+			return AsyncStorage.getMultiple(pairs);
 		}
 	},
 
@@ -51,7 +51,7 @@ const deviceStorage = {
 	update(key, value) {
 		return deviceStorage.get(key).then(item => {
 			value = typeof value === 'string' ? value : merge({}, item, value);
-			return AsyncStorage.setItem(key, JSON.stringify(value));
+			return AsyncStorage.set(key, JSON.stringify(value));
 		});
 	},
 
@@ -62,9 +62,9 @@ const deviceStorage = {
 	 */
 	delete(key) {
 		if (Array.isArray(key)) {
-			return AsyncStorage.multiRemove(key);
+			return AsyncStorage.removeMultiple(key);
 		} else {
-			return AsyncStorage.removeItem(key);
+			return AsyncStorage.remove(key);
 		}
 	},
 
@@ -73,7 +73,7 @@ const deviceStorage = {
 	 * @return {Promise} A promise which when it resolves gets passed the saved keys in AsyncStorage.
 	 */
 	keys() {
-		return AsyncStorage.getAllKeys();
+		return AsyncStorage.getKeys();
 	},
 
 	/**
